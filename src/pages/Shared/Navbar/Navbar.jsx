@@ -1,7 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    userSignOut().then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Log Out successful",
+      });
+    });
+  };
+
   const navLink = (
     <>
       <li>
@@ -9,9 +23,6 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to="/about">About</NavLink>
-      </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
       </li>
     </>
   );
@@ -41,6 +52,13 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             {navLink}
+            <div className="lg:hidden ml-[23px]">
+              {user ? (
+                <button onClick={handleSignOut}>Log Out</button>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}
+            </div>
           </ul>
         </div>
         <div>
@@ -51,6 +69,13 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
+        <div className="ml-4">
+          {user ? (
+            <button onClick={handleSignOut}>Log Out</button>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </div>
       </div>
       <div className="navbar-end">
         <button className="btn btn-outline btn-secondary">Appointment</button>
