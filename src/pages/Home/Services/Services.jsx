@@ -19,10 +19,10 @@ const Services = () => {
         <h2 className="text-[#151515] text-center font-bold text-5xl my-5">
           Our Service Area
         </h2>
-        <p className="text-[#737373] text-center max-w-[717px] mx-auto">
+        <p className="text-[#737373] text-center max-w-[680px] mx-auto">
           the majority have suffered alteration in some form, by injected
           humour, or randomised words which do not look even slightly
-          believable.{" "}
+          believable.
         </p>
       </div>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
