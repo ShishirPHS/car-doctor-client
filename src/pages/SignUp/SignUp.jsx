@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 
-const Login = () => {
-  const handleLogin = (e) => {
+const SignUp = () => {
+  const handleSignUp = (e) => {
     e.preventDefault();
   };
 
@@ -13,10 +13,22 @@ const Login = () => {
           <img src={img} alt="" />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleLogin} className="card-body">
+          <form onSubmit={handleSignUp} className="card-body">
             <p className="text-center text-3xl font-semibold mb-4">
-              Please Login!
+              Please SignUp
             </p>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="name"
+                className="input input-bordered"
+                required
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -40,18 +52,23 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
+                  Forgot password?
+                </a>
+              </label>
             </div>
             <p>
-              Do not have an account?{" "}
+              Already have an account?{" "}
               <Link
-                to="/signUp"
+                to="/login"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Sign Up
+                Login
               </Link>
             </p>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">SignUp</button>
             </div>
           </form>
         </div>
@@ -60,4 +77,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
