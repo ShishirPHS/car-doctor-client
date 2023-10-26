@@ -1,9 +1,35 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signInUser } = useContext(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          icon: "success",
+          text: "Login successful",
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        Swal.fire({
+          icon: "error",
+          text: "Incorrect Email or Password",
+        });
+      });
   };
 
   return (
