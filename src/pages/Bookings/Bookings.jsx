@@ -1,20 +1,24 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
+  const [bookings, setBookings] = useState([]);
 
-  const url = `http://localhost:5000/bookings?email=${user.email}`;
+  const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setBookings(data);
       });
   }, [url]);
 
-  return <div></div>;
+  return (
+    <div className="container mx-auto">Your Bookings: {bookings.length}</div>
+  );
 };
 
 export default Bookings;
