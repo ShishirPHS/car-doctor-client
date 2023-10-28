@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import BookingRow from "../BookingRow/BookingRow";
+import Swal from "sweetalert2";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
@@ -12,10 +13,31 @@ const Bookings = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setBookings(data);
       });
   }, [url]);
+
+  const handleDelete = (id) => {
+    const proceed = confirm("Are you sure you want to delete?");
+
+    if (proceed) {
+      fetch(`http://localhost:5000/bookings/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            Swal.fire({
+              icon: "success",
+              title: "Deleted Successfully",
+            });
+            const remaining = bookings.filter((booking) => booking._id !== id);
+            setBookings(remaining);
+          }
+        });
+    }
+  };
 
   return (
     <div className="container mx-auto py-36">
@@ -41,7 +63,11 @@ const Bookings = () => {
           </thead>
           <tbody>
             {bookings.map((booking) => (
-              <BookingRow key={booking._id} booking={booking}></BookingRow>
+              <BookingRow
+                key={booking._id}
+                booking={booking}
+                handleDelete={handleDelete}
+              ></BookingRow>
             ))}
           </tbody>
         </table>
