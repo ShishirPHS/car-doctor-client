@@ -14,7 +14,7 @@ const CheckOut = () => {
     const form = e.target;
     const name = form.name.value;
     const date = form.date.value;
-    const email = user?.email;
+    const email = form.email.value;
     const due = price;
 
     const booking = {
