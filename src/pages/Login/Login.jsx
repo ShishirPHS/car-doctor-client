@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Login = () => {
           icon: "success",
           text: "Login successful",
         });
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err.message);
