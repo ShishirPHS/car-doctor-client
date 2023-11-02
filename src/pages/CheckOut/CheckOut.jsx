@@ -1,11 +1,13 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+// import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const CheckOut = () => {
   const service = useLoaderData();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { title, price, _id, img } = service;
 
   const handleBookService = (e) => {
